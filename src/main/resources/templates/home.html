@@ -1,0 +1,58 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Getting Started: Serving Web Content</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css"/>
+</head>
+<body>
+	<div class="container">
+		<br/>
+		<div class="jumbotron">
+	    	    <h1>Spring Cloud Demo Application</h1>
+			<p>A <a href="http://github.com/cloudfoundry-samples/hello-spring-cloud">Spring application</a> 
+			   that uses <a href="http://projects.spring.io/spring-cloud">Spring Cloud</a> to connect to 
+			   cloud services and get information about cloud environment</p>
+		</div>
+		<h2>Cloud Services</h2>
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th>Service Connector Type</th>
+					<th>Connection address</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="service : ${services}">
+					<td><strong th:text="${service.key.name}"></strong></td>
+		    			<td th:text="${service.value}" />
+		    		</tr>
+	    		</tbody>
+	    </table>
+	    
+	    <h2>Application Instance Info</h2>
+	    <div class="row">
+	    		<strong class="col-sm-2">App Id:</strong>
+	    		<p class="col-sm-10" th:text="${instanceInfo.appId}">appId</p>
+	    </div>
+	    <div class="row">
+	    		<strong class="col-sm-2">Instance Id:</strong>	    
+	    		<p class="col-sm-10" th:text="${instanceInfo.instanceId}">instanceId</p>
+	    </div>
+	    <div class="row">
+	    		<strong class="col-sm-2">Properties:</strong>
+	    		<div class="col-sm-10">	    
+				<table class="table table-striped">
+					<tr th:each="prop : ${instanceInfo.properties}">
+						<td><strong th:text="${prop.key}"></strong></td>				
+			    			<td th:text="${prop.value}" />
+			    		</tr>
+			    </table>
+		    </div>
+	    </div>
+	    
+	    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+	    <script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+	</div>    
+</body>
+</html>
