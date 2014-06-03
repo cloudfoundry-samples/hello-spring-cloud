@@ -24,7 +24,7 @@
 			</thead>
 			<tbody>
 				<tr th:each="service : ${services}">
-					<td><strong th:text="${service.key.name}"></strong></td>
+					<td th:text="${service.key.name}" />
 		    			<td th:text="${service.value}" />
 		    		</tr>
 	    		</tbody>
