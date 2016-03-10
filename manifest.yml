@@ -3,7 +3,7 @@ applications:
 - name: hello-spring-cloud
   memory: 512M
   instances: 1
-  host: hello-spring-cloud-${random-word}
+  host: hello-spring-cloud
   domain: dev.ghama.io
   path: target/hello-spring-cloud-0.0.1-SNAPSHOT.jar
   services:
