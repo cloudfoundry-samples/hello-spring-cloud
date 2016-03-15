@@ -1,6 +1,6 @@
 ---
 applications:
-- name: hello-spring-cloud
+- name: hello-spring-cloud-1
   memory: 512M
   instances: 1
 #  host: hello-spring-cloud
