@@ -1,10 +1,10 @@
 ---
 applications:
 - name: hello-spring-cloud
-  memory: 1024M
+  memory: 512M
   instances: 1
-  host: hello-spring-cloud
-  domain: dev.ghama.io
+#  host: hello-spring-cloud
+#  domain: dev.ghama.io
   path: target/hello-spring-cloud-0.0.1-SNAPSHOT.jar
   env:
     SPRING_PROFILES_DEFAULT: cloud
