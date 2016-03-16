@@ -8,3 +8,4 @@ applications:
   path: target/hello-spring-cloud-0.0.1-SNAPSHOT.jar
   env:
     SPRING_PROFILES_DEFAULT: cloud
+    JAVA_OPTS: -Djava.security.egd=file:///dev/urandom
