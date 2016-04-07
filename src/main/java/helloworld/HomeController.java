@@ -42,11 +42,11 @@ public class HomeController {
         
         model.addAttribute("instanceInfo", instanceInfo);
         
-        if(session.getAttribute("now") == null || session.getAttribute("now").equals(""))
-        {
+        //if(session.getAttribute("now") == null || session.getAttribute("now").equals(""))
+        //{
         	session.setAttribute("now", System.currentTimeMillis()+"");
-        }
-        System.out.println("!!!!!!!!!!!!!!!!!!! : " + session.getAttribute("now"));
+        //}
+        //System.out.println("!!!!!!!!!!!!!!!!!!! : " + session.getAttribute("now"));
         
         return "home";
     }
