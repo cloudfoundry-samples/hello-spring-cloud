@@ -46,7 +46,7 @@ public class HomeController {
         {
         	session.setAttribute("now", System.currentTimeMillis()+"");
         }
-        System.out.println("!!!!!!!!!!!!!!!!!!! : " + nowst);
+        System.out.println("!!!!!!!!!!!!!!!!!!! : " + session.getAttribute("now"));
         
         return "home";
     }
