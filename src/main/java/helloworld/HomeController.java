@@ -42,8 +42,7 @@ public class HomeController {
         
         model.addAttribute("instanceInfo", instanceInfo);
         
-        String nowst = session.getAttribute("now").toString();
-        if(nowst == null || nowst.equals(""))
+        if(session.getAttribute("now") == null || session.getAttribute("now").equals(""))
         {
         	session.setAttribute("now", System.currentTimeMillis()+"");
         }
