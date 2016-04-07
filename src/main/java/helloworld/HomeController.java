@@ -20,6 +20,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.ReflectionUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
+import javax.servlet.http.HttpSession;
 
 @Controller
 public class HomeController {
@@ -31,7 +32,7 @@ public class HomeController {
     @Autowired ApplicationInstanceInfo instanceInfo;
 
     @RequestMapping("/")
-    public String home(Model model) {
+    public String home(Model model, HttpSession session) {
         Map<Class<?>, String> services = new LinkedHashMap<Class<?>, String>();
         services.put(dataSource.getClass(), toString(dataSource));
         services.put(mongoDbFactory.getClass(), toString(mongoDbFactory));
@@ -40,6 +41,13 @@ public class HomeController {
         model.addAttribute("services", services.entrySet());
         
         model.addAttribute("instanceInfo", instanceInfo);
+        
+        String nowst = session.getAttribute("now").toString();
+        if(nowst == null || nowst.equals(""))
+        {
+        	session.setAttribute("now", System.currentTimeMillis()+"");
+        }
+        System.out.println("!!!!!!!!!!!!!!!!!!! : " + nowst);
         
         return "home";
     }
