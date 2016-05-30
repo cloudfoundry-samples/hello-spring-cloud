@@ -28,7 +28,7 @@ public class HomeController {
     @Autowired(required = false) RedisConnectionFactory redisConnectionFactory;
     @Autowired(required = false) MongoDbFactory mongoDbFactory;
     @Autowired(required = false) ConnectionFactory rabbitConnectionFactory;
-    
+    private Environment springEnvironment;
     @Autowired ApplicationInstanceInfo instanceInfo;
 
     @RequestMapping("/")
@@ -47,7 +47,15 @@ public class HomeController {
         	session.setAttribute("now", System.currentTimeMillis()+"");
         //}
         //System.out.println("!!!!!!!!!!!!!!!!!!! : " + session.getAttribute("now"));
-        
+        Map<String, Object> map = new HashMap();
+    	for(Iterator it = ((AbstractEnvironment) springEnvironment).getPropertySources().iterator(); it.hasNext(); ) {
+            PropertySource propertySource = (PropertySource) it.next();
+            if (propertySource instanceof MapPropertySource) {
+                map.putAll(((MapPropertySource) propertySource).getSource());
+            }
+            
+            System.out.println(map.toString());
+        }
         return "home";
     }
     
