@@ -6,6 +6,8 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.HashMap;
+import java.util.Iterator;
 import org.springframework.core.env.AbstractEnvironment;
 import org.springframework.core.env.Environment;
 import org.springframework.core.env.MapPropertySource;
