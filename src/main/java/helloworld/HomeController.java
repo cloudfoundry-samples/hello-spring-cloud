@@ -36,6 +36,11 @@ public class HomeController {
     private Environment springEnvironment;
     @Autowired ApplicationInstanceInfo instanceInfo;
 
+    @Autowired
+    public HomeController(Environment springEnvironment) {
+        this.springEnvironment = springEnvironment;
+    }
+    
     @RequestMapping("/")
     public String home(Model model, HttpSession session) {
         Map<Class<?>, String> services = new LinkedHashMap<Class<?>, String>();
