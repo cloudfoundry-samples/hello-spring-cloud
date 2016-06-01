@@ -6,7 +6,12 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.LinkedHashMap;
 import java.util.Map;
-
+import java.util.HashMap;
+import java.util.Iterator;
+import org.springframework.core.env.AbstractEnvironment;
+import org.springframework.core.env.Environment;
+import org.springframework.core.env.MapPropertySource;
+import org.springframework.core.env.PropertySource;
 import javax.sql.DataSource;
 
 import org.springframework.amqp.rabbit.connection.ConnectionFactory;
@@ -20,6 +25,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.ReflectionUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
+import javax.servlet.http.HttpSession;
 
 @Controller
 public class HomeController {
@@ -27,11 +33,16 @@ public class HomeController {
     @Autowired(required = false) RedisConnectionFactory redisConnectionFactory;
     @Autowired(required = false) MongoDbFactory mongoDbFactory;
     @Autowired(required = false) ConnectionFactory rabbitConnectionFactory;
-    
+    private Environment springEnvironment;
     @Autowired ApplicationInstanceInfo instanceInfo;
 
+    @Autowired
+    public HomeController(Environment springEnvironment) {
+        this.springEnvironment = springEnvironment;
+    }
+    
     @RequestMapping("/")
-    public String home(Model model) {
+    public String home(Model model, HttpSession session) {
         Map<Class<?>, String> services = new LinkedHashMap<Class<?>, String>();
         services.put(dataSource.getClass(), toString(dataSource));
         services.put(mongoDbFactory.getClass(), toString(mongoDbFactory));
@@ -41,6 +52,20 @@ public class HomeController {
         
         model.addAttribute("instanceInfo", instanceInfo);
         
+        //if(session.getAttribute("now") == null || session.getAttribute("now").equals(""))
+        //{
+        	session.setAttribute("now", System.currentTimeMillis()+"");
+        //}
+        //System.out.println("!!!!!!!!!!!!!!!!!!! : " + session.getAttribute("now"));
+        Map<String, Object> map = new HashMap();
+    	for(Iterator it = ((AbstractEnvironment) springEnvironment).getPropertySources().iterator(); it.hasNext(); ) {
+            PropertySource propertySource = (PropertySource) it.next();
+            if (propertySource instanceof MapPropertySource) {
+                map.putAll(((MapPropertySource) propertySource).getSource());
+            }
+            
+            System.out.println(map.toString());
+        }
         return "home";
     }
     
