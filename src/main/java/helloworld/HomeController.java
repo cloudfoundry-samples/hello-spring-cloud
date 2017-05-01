@@ -27,23 +27,25 @@ public class HomeController {
     @Autowired(required = false) RedisConnectionFactory redisConnectionFactory;
     @Autowired(required = false) MongoDbFactory mongoDbFactory;
     @Autowired(required = false) ConnectionFactory rabbitConnectionFactory;
-    
-    @Autowired ApplicationInstanceInfo instanceInfo;
+
+    @Autowired(required = false) ApplicationInstanceInfo instanceInfo;
 
     @RequestMapping("/")
     public String home(Model model) {
-        Map<Class<?>, String> services = new LinkedHashMap<Class<?>, String>();
-        services.put(dataSource.getClass(), toString(dataSource));
-        services.put(mongoDbFactory.getClass(), toString(mongoDbFactory));
-        services.put(redisConnectionFactory.getClass(), toString(redisConnectionFactory));
-        services.put(rabbitConnectionFactory.getClass(), toString(rabbitConnectionFactory));
-        model.addAttribute("services", services.entrySet());
-        
         model.addAttribute("instanceInfo", instanceInfo);
-        
+
+        if (instanceInfo != null) {
+            Map<Class<?>, String> services = new LinkedHashMap<Class<?>, String>();
+            services.put(dataSource.getClass(), toString(dataSource));
+            services.put(mongoDbFactory.getClass(), toString(mongoDbFactory));
+            services.put(redisConnectionFactory.getClass(), toString(redisConnectionFactory));
+            services.put(rabbitConnectionFactory.getClass(), toString(rabbitConnectionFactory));
+            model.addAttribute("services", services.entrySet());
+        }
+
         return "home";
     }
-    
+
     private String toString(DataSource dataSource) {
         if (dataSource == null) {
             return "<none>";
@@ -58,12 +60,12 @@ public class HomeController {
                     ReflectionUtils.makeAccessible(urlMethod);
                     return stripCredentials((String) urlMethod.invoke(dataSource, (Object[])null));
                 } catch (Exception me){
-                    return "<unknown> " + dataSource.getClass();                    
+                    return "<unknown> " + dataSource.getClass();
                 }
             }
         }
     }
-    
+
     private String toString(MongoDbFactory mongoDbFactory) {
         if (mongoDbFactory == null) {
             return "<none>";
@@ -99,7 +101,7 @@ public class HomeController {
                     + rabbitConnectionFactory.getPort();
         }
     }
-    
+
     private String stripCredentials(String urlString) {
         try {
             if (urlString.startsWith("jdbc:")) {
