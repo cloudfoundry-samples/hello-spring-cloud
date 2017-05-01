@@ -5,7 +5,7 @@
 
 	<groupId>helloworld</groupId>
 	<artifactId>hello-spring-cloud</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.0.1.BUILD-SNAPSHOT</version>
 
 	<name>hello-spring-cloud</name>
 	<description>Spring Cloud Hello World with Spring Boot</description>
@@ -13,7 +13,7 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>1.2.0.BUILD-SNAPSHOT</version>
+		<version>1.5.3.RELEASE</version>
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
 
@@ -28,7 +28,7 @@
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-redis</artifactId>
+			<artifactId>spring-boot-starter-data-redis</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -42,22 +42,9 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-thymeleaf</artifactId>
 		</dependency>
-
-		<!-- CloudFoundry/Heroku -->
 		<dependency>
-			<groupId>org.springframework.cloud</groupId>
-			<artifactId>spring-cloud-cloudfoundry-connector</artifactId>
-			<version>${spring-cloud.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.cloud</groupId>
-			<artifactId>spring-cloud-heroku-connector</artifactId>
-			<version>${spring-cloud.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.cloud</groupId>
-			<artifactId>spring-cloud-spring-service-connector</artifactId>
-			<version>${spring-cloud.version}</version>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-cloud-connectors</artifactId>
 		</dependency>
 
 		<dependency>
@@ -65,7 +52,6 @@
 			<artifactId>h2</artifactId>
 			<scope>runtime</scope>
 		</dependency>
-
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
@@ -90,7 +76,7 @@
 		<start-class>helloworld.Application</start-class>
 		<java.version>1.7</java.version>
 
-		<spring-cloud.version>1.1.0.BUILD-SNAPSHOT</spring-cloud.version>
+		<spring-cloud.version>1.2.3.RELEASE</spring-cloud.version>
 		<postgres-driver.version>9.0-801.jdbc4</postgres-driver.version>
 	</properties>
 
@@ -103,25 +89,6 @@
 		</plugins>
 	</build>
 
-	<repositories>
-		<repository>
-			<id>org.springframework.maven.milestone</id>
-			<name>Spring Maven Milestone Repository</name>
-			<url>http://repo.spring.io/milestone</url>
-			<snapshots>
-				<enabled>false</enabled>
-			</snapshots>
-		</repository>
-		<repository>
-			<id>spring-snapshots</id>
-			<name>Spring Snapshots</name>
-			<url>http://repo.spring.io/snapshot</url>
-			<snapshots>
-				<enabled>true</enabled>
-			</snapshots>
-		</repository>
-	</repositories>
-
 	<pluginRepositories>
 		<pluginRepository>
 			<id>org.springframework.maven.milestone</id>
@@ -129,14 +96,6 @@
 			<url>http://repo.spring.io/milestone</url>
 			<snapshots>
 				<enabled>false</enabled>
-			</snapshots>
-		</pluginRepository>
-		<pluginRepository>
-			<id>spring-snapshots</id>
-			<name>Spring Snapshots</name>
-			<url>http://repo.spring.io/snapshot</url>
-			<snapshots>
-				<enabled>true</enabled>
 			</snapshots>
 		</pluginRepository>
 	</pluginRepositories>

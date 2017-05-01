@@ -10,8 +10,8 @@
 		<br/>
 		<div class="jumbotron">
 	    	    <h1>Spring Cloud Demo Application</h1>
-			<p>A <a href="http://github.com/cloudfoundry-samples/hello-spring-cloud">Spring application</a> 
-			   that uses <a href="http://projects.spring.io/spring-cloud">Spring Cloud</a> to connect to 
+			<p>A <a href="http://github.com/cloudfoundry-samples/hello-spring-cloud">Spring application</a>
+			   that uses <a href="https://cloud.spring.io/spring-cloud-connectors/">Spring Cloud Connectors</a> to connect to 
 			   cloud services and get information about cloud environment</p>
 		</div>
 		<h2>Cloud Services</h2>
@@ -29,30 +29,30 @@
 		    		</tr>
 	    		</tbody>
 	    </table>
-	    
+
 	    <h2>Application Instance Info</h2>
 	    <div class="row">
 	    		<strong class="col-sm-2">App Id:</strong>
 	    		<p class="col-sm-10" th:text="${instanceInfo.appId}">appId</p>
 	    </div>
 	    <div class="row">
-	    		<strong class="col-sm-2">Instance Id:</strong>	    
+	    		<strong class="col-sm-2">Instance Id:</strong>
 	    		<p class="col-sm-10" th:text="${instanceInfo.instanceId}">instanceId</p>
 	    </div>
 	    <div class="row">
 	    		<strong class="col-sm-2">Properties:</strong>
-	    		<div class="col-sm-10">	    
+	    		<div class="col-sm-10">
 				<table class="table table-striped">
 					<tr th:each="prop : ${instanceInfo.properties}">
-						<td><strong th:text="${prop.key}"></strong></td>				
+						<td><strong th:text="${prop.key}"></strong></td>
 			    			<td th:text="${prop.value}" />
 			    		</tr>
 			    </table>
 		    </div>
 	    </div>
-	    
+
 	    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 	    <script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
-	</div>    
+	</div>
 </body>
 </html>
